@@ -1,0 +1,30 @@
+{
+  "name": "simple-webpack-ts-starter",
+  "version": "1.0.0",
+  "description": "Simple starter kit for Typescript with Webpack",
+  "main": "index.html",
+  "dependencies": {
+    "core-js": "^2.5.1",
+    "rxjs": "^5.5.2"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.0",
+    "ejs-loader": "^0.3.0",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.19.0",
+    "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.5",
+    "webpack-obfuscator": "^0.12.3"
+  },
+  "scripts": {
+    "dev": "rm -rf ./dist && webpack-dev-server --config ./webpack.config.js  --env.dev --inline --hot --progress --watch  --open",
+    "prod": "rm -rf ./dist && NODE_ENV=production webpack --config ./webpack.config.js  --env.prod --progress --profile --color --display-error-details --display-cached --bail",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicolas Fazio",
+  "license": "ISC"
+}
