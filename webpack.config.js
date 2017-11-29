@@ -3,14 +3,16 @@
  * @Date:   28-11-2017
  * @Email:  contact@nicolasfazio.ch
  * @Last modified by:   webmaster-fazio
- * @Last modified time: 28-11-2017
+ * @Last modified time: 29-11-2017
  */
 
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const DashboardPlugin = require("webpack-dashboard/plugin");
+var ManifestPlugin = require('webpack-manifest-plugin');
 var JavaScriptObfuscator = require('webpack-obfuscator');
 var HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin
 var pkg = require('./package.json')
@@ -58,7 +60,9 @@ var commonConfig = {
         NODE_ENV: JSON.stringify(nodeEnv)
       }
     }),
-    new HotModuleReplacementPlugin(hmrConfig),
+    new CleanWebpackPlugin(['dist']),
+    new ManifestPlugin(),
+    new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: "Simple Typescript Webpack Starter",
       template: "!!ejs-loader!src/index.html"
@@ -84,7 +88,8 @@ var commonConfig = {
 function getDevPlugins() {
   return [
     ...commonConfig.plugins,
-    new UglifyJSPlugin({ uglifyOptions: { } })
+    new UglifyJSPlugin({ uglifyOptions: { } }),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ];
 }
 
